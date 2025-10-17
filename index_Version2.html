@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Employee Engagement Committee - Information Hub</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body { font-family: 'Segoe UI', Arial, sans-serif; margin: 0; padding: 0; background: #f9f9f9;}
+    header { background: #274472; color: #fff; padding: 1.5rem; text-align: center;}
+    nav { background: #4169a7; padding: 0.5rem 0; text-align: center;}
+    nav a { color: #fff; margin: 0 1.2rem; text-decoration: none; font-weight: bold;}
+    main { max-width: 700px; margin: 2rem auto; background: #fff; border-radius: 8px; box-shadow: 0 2px 8px #0001; padding: 2rem;}
+    section { margin-bottom: 2.5rem; }
+    h2 { color: #274472; }
+    .announcements, .events-list { list-style: none; padding: 0;}
+    .announcements li, .events-list li { background: #f0f5fa; margin: 0.6rem 0; padding: 0.9rem; border-radius: 5px;}
+    .suggestion-result { margin-top: 1rem; color: #388e3c;}
+    .btn { background: #274472; color: #fff; border: none; padding: 0.7rem 1.5rem; border-radius: 5px; cursor: pointer; font-size: 1rem;}
+    .btn:hover { background: #4169a7;}
+    @media (max-width: 600px) {
+      main { padding: 1rem;}
+      nav a { margin: 0 0.5rem; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Employee Engagement Committee</h1>
+    <p>Information Hub</p>
+  </header>
+  <nav>
+    <a href="#announcements">Announcements</a>
+    <a href="#events">Events</a>
+    <a href="#suggestion-box">Suggestion Box</a>
+  </nav>
+  <main>
+    <section id="announcements">
+      <h2>Latest Announcements</h2>
+      <ul class="announcements" id="announcementList">
+        <li>Welcome to the Employee Engagement Committee Hub!</li>
+        <li>Adopt-a-CR Campaign Register Your Team on October 1, 2025.</li>
+      </ul>
+      <form id="addAnnouncementForm" autocomplete="off">
+        <input type="text" id="newAnnouncement" placeholder="Add an announcement..." style="width:70%;" required>
+        <button class="btn" type="submit">Add</button>
+      </form>
+    </section>
+    <section id="events">
+      <h2>Upcoming Events</h2>
+      <ul class="events-list" id="eventsList">
+        <li>
+          <strong> Shared Efforts, Shared Campaign Launching</strong> - Novemnber 1, 2025
+        </li>
+        <li>
+          <strong>Want to Know your Work-Focus Style?</strong> - December 1, 2025
+        </li>
+      </ul>
+      <form id="addEventForm" autocomplete="off">
+        <input type="text" id="newEvent" placeholder="Add an event..." style="width:60%;" required>
+        <input type="date" id="eventDate" required>
+        <button class="btn" type="submit">Add</button>
+      </form>
+    </section>
+    <section id="suggestion-box">
+      <h2>Suggestion Box</h2>
+      <form id="suggestionForm" autocomplete="off">
+        <textarea id="suggestionInput" placeholder="Your suggestion..." rows="3" style="width:100%;" required></textarea>
+        <br>
+        <button class="btn" type="submit">Submit</button>
+      </form>
+      <div class="suggestion-result" id="suggestionResult"></div>
+    </section>
+  </main>
+  <script>
+    // Announcements
+    document.getElementById("addAnnouncementForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      var text = document.getElementById("newAnnouncement").value.trim();
+      if (text) {
+        var li = document.createElement("li");
+        li.textContent = text;
+        document.getElementById("announcementList").appendChild(li);
+        document.getElementById("newAnnouncement").value = "";
+      }
+    });
+
+    // Events
+    document.getElementById("addEventForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      var eventText = document.getElementById("newEvent").value.trim();
+      var eventDate = document.getElementById("eventDate").value;
+      if (eventText && eventDate) {
+        var li = document.createElement("li");
+        li.innerHTML = "<strong>" + eventText + "</strong> - " + eventDate;
+        document.getElementById("eventsList").appendChild(li);
+        document.getElementById("newEvent").value = "";
+        document.getElementById("eventDate").value = "";
+      }
+    });
+
+    // Suggestion Box
+    document.getElementById("suggestionForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      var suggestion = document.getElementById("suggestionInput").value.trim();
+      if (suggestion) {
+        document.getElementById("suggestionResult").textContent = "Thank you for your suggestion!";
+        document.getElementById("suggestionInput").value = "";
+        setTimeout(function() {
+          document.getElementById("suggestionResult").textContent = "";
+        }, 3000);
+      }
+    });
+  </script>
+</body>
+</html>
